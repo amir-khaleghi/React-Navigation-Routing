@@ -1,7 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import className from 'classnames';
 const Button = ({
-  className,
   children,
   primary,
   secondary,
@@ -10,8 +10,26 @@ const Button = ({
   danger,
   outline,
   rounded,
+  ...rest
 }) => {
-  return <button className={className}>{children}</button>;
+  const classes = className(
+    rest.className,
+    ' flex justify-center items-center px-3 py-1.5 w-40 m-1 border',
+    {
+      'border-blue-500 bg-blue-500 text-white': primary,
+      'border-black bg-black text-white': secondary,
+      'border-green-500 bg-green-500 text-white': success,
+      'border-yellow-500 bg-yellow-500 text-white': warning,
+      'border-red-500 bg-red-500 text-white': danger,
+      'bg-white text-slate-800': outline,
+      'rounded-full': rounded,
+    }
+  );
+  return (
+    <button {...rest} className={classes}>
+      {children}
+    </button>
+  );
 };
 
 Button.propTypes = {
